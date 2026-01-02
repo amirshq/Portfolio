@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Formation - BigQuery</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo_icon_SB.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism.min.css">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+  p {
+    font-size: 18px; /* Augmenter la taille de police des paragraphes */
+    line-height: 1.6; /* Espacement des lignes pour une meilleure lisibilité */
+    margin-bottom: 20px; /* Espace en bas de chaque paragraphe */
+  }
+
+  #scrollProgress {
+    position: fixed;
+    width: 100%;
+    height: 3px;
+    background-color: transparent;
+    top: 0;
+    z-index: 9999; /* Ensuring it stays on top */
+  }
+
+  #innerBar {
+    display: block;
+    background-color: #ff4d00;
+    height: inherit;
+    width: 0%;
+  }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: MyResume
+  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+  * Updated: Jun 14 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+  <div id="scrollProgress">
+    <div id="innerBar"></div>
+  </div>
+
+  <header id="header" class="header d-flex flex-column justify-content-center">
+    <!-- Contenu du header -->
+  </header>
+
+  <main class="main">
+    <!-- Contenu du main -->
+  </main>
+</body>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex flex-column justify-content-center">
+      <i class="header-toggle d-xl-none bi bi-list"></i>
+  </header>
+
+  <main class="main">
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="portfolio-details-slider swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "navigation": {
+                "nextEl": ".swiper-button-next",
+                "prevEl": ".swiper-button-prev"
+              },
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+            </script>
+
+            <div class="single-image">
+              <img src="assets/img/portfolio/Bigquery.png" alt="cover image de la ormation bigquery" class="img-fluid" style="max-width: 600px; height: auto; margin-left: -350px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-between gy-4 mt-4">
+
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="portfolio-description"><br>
+              <h1>Centralisation de données dans Google Cloud BigQuery et exploitation de Gemini</h1><br><br>
+              <p>
+                 L'utilisation d'un Data Warehouse est un pilier incontournable pour les entreprises désireuses de maximiser l'efficacité de leurs opérations. Ce système centralisé de stockage de données est conçu pour agréger, structurer et analyser de grandes quantités d'informations provenant de diverses sources. Vous pouvez alors croiser les informations provenant de ces différentes sources pour obtenir une vue plus précise et détaillée des performances de vos opérations. En comprenant mieux les interactions entre vos systèmes et vos données collectées, vous pouvez optimiser vos processus internes et ainsi développer une prise de décision stratégique plus avertie.
+             </p>
+              <p>
+                 Google Cloud est une plateforme qui regroupe une multitude d'outils (ou applications) pour traiter et stocker des données. Parmi ces outils, BigQuery permet le stockage et l'organisation des données.
+              </p>
+              <p>
+                 Cette article est la première partie d'une trilogie épique dans laquelle nous verrons comment utiliser cette plateforme pour centraliser, exploiter, extrapoler et visualiser des données. Bientôt, plus personne ne pourra s'asseoir à votre table et dire "je maitrise mieux les données que toi". Dans cette première partie, nous étudierons la démarche d'importation de données dans Google Cloud. Pour faire simple, étape 1 : récupérer ses données dans Google Cloud.
+             </p><br>
+              <p>
+                 <i>NB : il existe de nombreuses approches différentes pour importer des données. Nous nous concentrerons ici sur le cas le plus courant, où les données sont récupérées via des APIs.</i>
+              </p><br>
+              <p>
+                Prérequis :
+                <ul>
+                     <li>Un compte Google Cloud (vous pouvez obtenir un crédit gratuit pendant 90 jours lors de l'ouverture d'un nouveau compte. Voir ce <a href="https://cloud.google.com/storage/?hl=fr" target="_blank">lien</a>).</li>
+                     <li>Un projet Google Cloud dans lequel vous centraliserez vos données.</li>
+                     <li>Un compte (gratuit) sur <a href="https://polygon.io/dashboard" target="_blank">polygon.io</a> si vous souhaitez utiliser la même API que moi.</li>
+                </ul>
+              </p><br><br>
+              <h3>1. Requête API et transformation de données</h3><br>
+              <p>
+                 L'API de Polygon.io fournit des données sur les marchés boursiers et nécessite un léger prétraitement avant leur envoi vers BigQuery, ce qui constituera un bon exemple. Mais avant de se lancer dans Google Cloud, jetons d’abord un œil à la structure du code Python.
+              </p>
+
+              <p>
+                  Nous utiliserons une requête GET sur le point d'accès suivant : /v2/aggs/ticker/AAPL/range/1/day/2024-03-15/2024-06-15. Ce dernier nous permet de récupérer les prix de l'action Apple par jour entre le 15 mars et le 15 juin 2024 :
+              </p>
+
+    <div class="code-container">
+        <div class="code-header">
+            <span class="code-language">Python</span>
+            <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+        </div>
+        <pre><code id="code-block" class="">
+import requests
+import pandas as pd
+
+url = 'https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2024-03-15/2024-06-15'
+params = {
+    'adjusted': 'true',
+    'sort': 'asc',
+    'apiKey': 'your_api_key'
+}
+response = requests.get(url, params=params)
+data = response.json()
+
+print(data)
+pd.DataFrame(data['results'])
+        </code></pre>
+    </div>
+<p><i>NB : Pensez à remplacer your_api_key par votre clé.</i></p><br>
+              <p>
+                 La réponse brute au format JSON se trouve dans "data" et l'évolution des prix d'Apple qui nous intéresse se trouve dans "data['results']" que nous transformons ici en dataframe. Vous devriez obtenir quelque chose de ce style :              
+              </p><br>
+              <div class="single-image">
+                 <img src="assets/img/portfolio/bq_1.png" alt="Portfolio Image" class="img-fluid" style="max-width: 600px; height: auto; margin-left: 30px;">
+              </div><br><br>
+              <p>
+                 À travers ces différentes colonnes, gardons vw : la moyenne pondérée par le volume, n : le nombre de transactions par période et v : le volume des échanges du symbole au cours de la période donnée.
+              </p><br>
+              <p>
+                 Et soyons fous, construisons ainsi un portefeuille de trois actions. On reproduit les mêmes actions pour les actions Nvidia et Amazon.
+              </p>
+
+    <div class="code-container">
+        <div class="code-header">
+            <span class="code-language">Python</span>
+            <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+        </div>
+        <pre><code id="code-block" class="">
+import requests
+import pandas as pd
+
+# Define a function to get the data for a given ticker
+def get_stock_data(ticker):
+    url = f'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/2024-03-15/2024-06-15'
+    params = {
+        'adjusted': 'true',
+        'sort': 'asc',
+        'apiKey': your_api_key'
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    return pd.DataFrame(data['results'])
+
+# List of tickers
+tickers = ['AAPL', 'NVDA', 'AMZN']
+
+# Dictionary to store dataframes
+dataframes = {}
+
+# Loop through each ticker and get the data
+for ticker in tickers:
+    df = get_stock_data(ticker)[['vw', 'v', 'n']]
+    df.columns = [f"{ticker.lower()}_{col}" for col in df.columns]
+    dataframes[ticker] = df
+
+# Concatenate dataframes side by side
+combined_df = pd.concat(dataframes.values(), axis=1)
+        </code></pre>
+    </div><br><br><br><br><br>
+              <h3>2. Intégration dans Cloud Function</h3><br>
+              <p>
+                 Notre requête est prête, il nous faut maintenant l'intégrer dans ce que Google appelle une Cloud Function. Rendez-vous dans Google Cloud, sous l'outil Cloud Function. Voici la marche à suivre :              
+              </p>
+              <p>
+                <ol>
+                     <li>Créez une nouvelle fonction.</li>
+                     <li>Configurez le déclencheur à pub/sub :</li><br>
+                     <div class="single-image">
+                        <img src="assets/img/portfolio/bq_2.png" alt="image de configuration d'une cloud function google" class="img-fluid" style="max-width: 400px; height: auto;">
+                     </div><br><br>
+                     <li> Créez si besoin un « sujet Cloud pub/sub». Le sujet est une sorte de boîte aux lettres où les messages sont envoyés (voici la documentation à ce sujet <a href="https://cloud.google.com/pubsub/docs/create-topic?hl=fr" target="_blank">ici</a>).</li><br>
+                </ol>
+              </p>
+              <p>
+                 Les autres paramètres peuvent rester par défaut. Ensuite, vous accéderez à l'interface où vous pouvez insérer le code Python.
+              </p>
+              <div class="single-image">
+                 <img src="assets/img/portfolio/bq_3.png" alt="autre image de configuration d'une cloud function google" class="img-fluid" style="max-width: 800px; height: auto;">
+              </div><br><br>
+              <p>
+                 Sélectionnez une version récente de Python dans « environnement d'exécution ». Le « point d'entrée » est le nom de la fonction qui gère le pub/sub, c'est-à-dire le transfert de données de notre appel à l'API vers Google Cloud. Pour cette tâche, nous devons créer une deuxième fonction Python qui appelle notre fonction get_stock_data. Je nomme cette deuxième fonction « main_function ».
+              </p>
+              <p>
+                  D'autre part, nous devons également ajouter à notre fonction get_stock_data l'emplacement de destination des données. En ajoutant la fonction main_function et en modifiant get_stock_data, nous obtenons notre code complet :
+              </p>
+    <div class="code-container">
+        <div class="code-header">
+            <span class="code-language">Python</span>
+            <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+        </div>
+        <pre><code id="code-block" class="">
+import requests
+import pandas as pd
+from google.cloud import storage
+
+def get_stock_data():
+    # API key for Polygon.io
+    api_key = your_api_key'
+    # List of tickers
+    tickers = ['AAPL', 'NVDA', 'AMZN']
+
+    # Dictionary to store dataframes
+    dataframes = {}
+
+    # Loop through each ticker and get the data
+    for ticker in tickers:
+        url = f'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/2024-03-15/2024-06-15'
+        params = {
+            'adjusted': 'true',
+            'sort': 'asc',
+            'apiKey': api_key
+        }
+        response = requests.get(url, params=params)
+        data = response.json()
+        df_stock = pd.DataFrame(data['results'])[['vw', 'v', 'n']]
+        df_stock.columns = [f"{ticker.lower()}_{col}" for col in df_stock.columns]
+        dataframes[ticker] = df_stock
+
+    # Concatenate dataframes side by side
+    combined_df = pd.concat(dataframes.values(), axis=1)
+
+    # Google Cloud Storage client setup
+    client = storage.Client(project='bq-stock-demo')
+    bucket = client.get_bucket('stock_demo_bucket')
+    blob = bucket.blob('stock_data.csv')
+    blob.upload_from_string(combined_df.to_csv(index=False), content_type='text/csv')
+
+def main_function(data, context):
+    get_stock_data()
+        </code></pre>
+    </div><br>
+              <p>
+                 Remplacez le nom du projet « bq-stock-demo » par le nom de votre projet et le bucket par celui de votre choix. Mais attendez... Qu'est-ce qu'un bucket ? Vous l'aurez constaté, pour situer la destination, la fonction intègre désormais le nom du projet (dans « client ») et un « bucket ». Le bucket est simplement un espace de stockage transitoire entre notre requête API et BigQuery. Cette étape transitoire n'est pas obligatoire, mais c'est une bonne pratique pour de nombreuses raisons. Notamment, gérer les erreurs et s'assurer que les données sont sauvegardées de manière fiable, dans divers formats. En cas d'échec de la tâche de chargement dans BigQuery, les données pourront être facilement récupérées et le transfert réessayé. Le bucket constitue donc un point de restauration de la donnée en cas de problème dans le data Warehouse. La question qu'il reste à se poser : est-ce que je veux créer mon propre bucket ou utiliser un bucket public. Généralement, la première réponse est retenue pour des raisons évidentes de sécurité. Vous pouvez vous rendre dans « Buckets » dans la barre de recherche Google Cloud et créer le vôtre. J'ai nommé mon bucket « stock_demo_bucket ». Les deux paramètres importants étant de rendre le bucket privé et de paramétrer un délai de stockage permettant de supprimer automatiquement les données au bout de par exemple 7 jours.
+             </p>
+              <p>
+                 Nous avons désormais une fonction qui récupère la donnée et la place dans un environnement temporaire par lequel la donnée va transiger. Reste à rendre le tout autonome pour de bon. Pour cela, deux options : écraser la donnée et la réimporter à jour ou ajouter la nouvelle donnée à celle déjà présente dans notre table.
+             </p><br><br><br>
+             <h3>3. Automatiser l'import de données</h3><br>
+             <p>
+                Rendez-vous à nouveau dans la barre de recherche, puis dans Cloud Scheduler. Créez une tâche et nommez-la. Sélectionnez une fréquence à laquelle la fonction sera lancée au format unix-cron. Par exemple, 0 23 * * * vaut pour tous les jours à 23h. Cliquez sur « continuer », puis pub/sub pour le type de cible et votre sujet crée plus tôt :
+             </p>
+             <div class="multiple-image">
+                 <img src="assets/img/portfolio/bq_4.png" alt="configuration cloud scheduler 1" class="img-fluid" style="max-width: 300px; height: auto;">
+                 <img src="assets/img/portfolio/bq_5.png" alt="configuration cloud scheduler 2" class="img-fluid" style="max-width: 400px; height: auto;">
+             </div><br><br>
+             <p>
+                Forcez l'exécution pour lancer une première fois la fonction dès maintenant (en cliquant sur les 3 petites points à droite). Vous pouvez ensuite retourner au bucket pour vérifier que le fichier csv fraichement crée par la fonction est présent :
+             </p>
+            <div class="single-image">
+              <img src="assets/img/portfolio/bq_6.png" alt="bucket avec les données" class="img-fluid" style="max-width: 700px; height: auto;">
+            </div>
+            <p>
+               Les préparatifs sont finis, on peut aller directement dans BigQuery. En revanche, quelques clarifications ne seraient pas trop demandées à ce point du processus. Pour faire simple, BigQuery est l'environnement Google Cloud qui sert à créer un ensemble de données. Dans des cas réels de centralisation de données, on a généralement affaire à des données variées et en quantités. Comme toute bonne base de données, il est conseillé de faire un schéma au préalable des différentes tables qui organiseront le Warehouse et leurs relations. Vous l'aurez compris en regardant l'image, il faut créer un ensemble de données :
+            </p>
+            <div class="multiple-image">
+                <img src="assets/img/portfolio/bq_7.png" alt="configuration cloud scheduler 1" class="img-fluid" style="max-width: 30px; height: auto;">
+                <img src="assets/img/portfolio/bq_8.png" alt="configuration cloud scheduler 2" class="img-fluid" style="max-width: 300px; height: auto;">
+            </div><br><br>
+            <p>
+               On crée notre première (et unique) table. Sélectionnez votre fichier CSV dans votre bucket :
+            </p>
+<div class="multiple-image">
+                <img src="assets/img/portfolio/bq_9.png" alt="configuration cloud scheduler 1" class="img-fluid" style="max-width: 400px; height: auto;">
+                <img src="assets/img/portfolio/bq_10.png" alt="configuration cloud scheduler 2" class="img-fluid" style="max-width: 400px; height: auto;">
+            </div><br><br>
+            <p>
+               Cochez la détection automatique pour le schéma, les types de variables seront automatiquement attribués. Le tour est joué. Vous pouvez aller visualiser vos données dans « aperçu ».
+            </p>
+            <div class="single-image">
+              <img src="assets/img/portfolio/bq_11.png" alt="bucket avec les données" class="img-fluid" style="max-width: 600px; height: auto;">
+            </div><br><br><br><br>
+            <h3>4.	Éxploration des capacités de Gemini</h3><br>
+            <p>
+               Avec l'IA qui prend de l'ampleur semaine après semaine, une bonne démonstration de science des données ne se fait plus sans une utilisation de cette dernière. Ça tombe bien, Gemini est désormais intégré à BigQuery, que ce soit pour coder des requêtes SQL ou pour l'explorer en quasi direct.
+            </p>
+            <div class="single-image">
+              <img src="assets/img/portfolio/bq_12.png" alt="bucket avec les données" class="img-fluid" style="max-width: 600px; height: auto;">
+            </div><br>
+            <p>
+               Allez dans schéma > requête > Dans le canevas de données.
+            </p>
+            <div class="single-image">
+              <img src="assets/img/portfolio/bq_13.png" alt="bucket avec les données" class="img-fluid" style="max-width: 500px; height: auto;">
+            </div><br>
+            <p>
+               Vous avez le choix entre joindre cette donnée à une autre table ou l'interroger. Pour des raisons évidentes, on va choisir de l'interroger pour notre exemple.<br>
+Cliquez sur « interroger ». Il ne reste plus qu'à poser une question sur vos données à Gemini. La version est encore Beta, donc il est conseillé de donner des détails et du contexte. Voici un exemple de prompt : « All columns with _vw in the name represent stock prices. Each line is worth one day. Which stock has brought me the most money since day 1 ? ».
+            </p>
+            <div class="single-image">
+              <img src="assets/img/portfolio/bq_14.png" alt="bucket avec les données" class="img-fluid" style="max-width: 600px; height: auto;">
+            </div>
+            <p>
+               En guise de devoir à la maison, à vous de vérifier si ça a marché.
+            </p><br><br>
+
+            <h3>Conclusion</h3><br>
+            <p>
+               Google Cloud est une plateforme qui regorge de ressources, à tel point qu'il est au début difficile de s'y retrouver. Mais une fois assimilé, ces outils permettent de réaliser à peu près tout ce qu'on aimerait faire avec de la donnée, que ce soit l'importer, la transformer ou la stocker. Nous avons exploré dans cette démo une partie de ces outils, mais ne vous méprenez pas, ce n'est qu'une infime partie des outils disponibles. En revanche, non seulement il faut savoir maîtriser la plateforme et ses outils, mais il y a bien évidemment aussi un coût qui, à mesure que l'on traite de grandes quantités de données, peut augmenter.<br><br>
+               Ceci étant dit, un Data Warehouse, peu importe si la plateforme utilisée est Google Cloud ou une autre, constitue selon moi un excellent investissement de temps et d’argent. La raison étant que c’est en quelque sorte une porte d'entrée à une amélioration constante de l’utilisation de vos données et donc de vos processus. Par exemple, une fois vos données centralisées, et vos analyses faites, vous pouvez aller plus loin en créant des modèles statistiques sur mesure, tels que des modèles prédictifs, pour mieux comprendre les tendances et les impacts de différentes actions. Dans un monde toujours plus compétitif, ce genre d'avantage concurrentiel n'est pas négligeable.
+            </p><br><br><br>
+
+  <h4>Léxique</h4><br>
+  <ul>
+    <li><em><b>Requête :</b> un appel à l'API pour récupérer une certaine donnée.</em></li>
+    <li><em><b>Réponse :</b> Les données retournées suite à la requête ou l'erreur dans le cas échéant.</em></li>
+    <li><em><b>Base url :</b> l'url commun à toutes les requêtes d'une certaine API. Exemple : https://api.polygon.io</em></li>
+    <li><em><b>Endpoint :</b> Tout ce qui suit le base url et qui permet d’atteindre un certain emplacement ou une certaine action spécifique dans l’API. Exemple : 2024-03-15/2024-06-15 permet d'atteindre pour l’action Apple, tous les prix organisés par jour entre mars et juin 2024.</em></li>
+    <li><em><b>Cloud Function :</b> outil de création de fonction. Sert ici à créer une fonction de requête API, ensuite automatisée via Cloud Scheduler.</em></li>
+  </ul>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="portfolio-info">
+              <h3>informations</h3>
+              <ul>
+                <li><strong>Sujets</strong>Base de données centralisées, requête API, BigQuery</li>
+                <li><strong>Écrit par</strong>Sacha Benadiba</li>
+                <li><strong>Dernière mise à jour de l'article</strong> 20 Septembre, 2023</li>
+                <li><strong>Lecture suivante</strong>Centralisation de données et architecture partie II : Automatisation</li>
+                <li><a href="bigquery-partII.html" class="btn-visit align-self-start">Lire la partie II</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer position-relative">
+    <div class="container">
+      <h3 class="sitename">Sacha Benadiba</h3>
+      <p>Merci de visiter mon portfolio. Si vous avez des questions ou souhaitez discuter de collaborations potentielles, n'hésitez pas à me contacter.</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+        <a href=""><i class="bi bi-skype"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Alex Smith</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you've purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+<script>
+  window.onscroll = function() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("innerBar").style.width = scrolled + "%";
+  };
+</script>
+
+<script>
+function copyCode() {
+    const codeBlock = document.getElementById('code-block');
+    const range = document.createRange();
+    range.selectNode(codeBlock);
+    window.getSelection().removeAllRanges();  // Clear current selection
+    window.getSelection().addRange(range);  // Select the text
+    try {
+      document.execCommand('copy');
+      // Change the icon to 'checked' after copy
+      const copyButton = document.querySelector('.copy-button i');
+      copyButton.classList.remove('fa-copy');
+      copyButton.classList.add('fa-check');
+      // Reset the icon back to 'copy' after 2 seconds
+      setTimeout(() => {
+        copyButton.classList.remove('fa-check');
+        copyButton.classList.add('fa-copy');
+      }, 500);
+    } catch (err) {
+      alert('Failed to copy code');
+    }
+    window.getSelection().removeAllRanges();  // Deselect the text
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-javascript.min.js"></script>
+
+</body>
+
+</html>

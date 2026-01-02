@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Formation - BigQuery</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo_icon_SB.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism.min.css">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  #scrollProgress {
+    position: fixed;
+    width: 100%;
+    height: 3px;
+    background-color: transparent;
+    top: 0;
+    z-index: 9999;
+  }
+
+  #innerBar {
+    display: block;
+    background-color: #ff4d00;
+    height: inherit;
+    width: 0%;
+  }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: MyResume
+  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+  * Updated: Jun 14 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+  <div id="scrollProgress">
+    <div id="innerBar"></div>
+  </div>
+
+  <header id="header" class="header d-flex flex-column justify-content-center">
+    <!-- Contenu du header -->
+  </header>
+
+  <main class="main">
+    <!-- Contenu du main -->
+  </main>
+
+  <body class="portfolio-details-page">
+
+    <header id="header" class="header d-flex flex-column justify-content-center">
+      <i class="header-toggle d-xl-none bi bi-list"></i>
+    </header>
+
+    <main class="main">
+      <!-- Portfolio Details Section -->
+      <section id="portfolio-details" class="portfolio-details section">
+        <div class="container" data-aos="fade-up">
+          <div class="portfolio-details-slider swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "navigation": {
+                  "nextEl": ".swiper-button-next",
+                  "prevEl": ".swiper-button-prev"
+                },
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                }
+              }
+            </script>
+
+            <div class="single-image">
+              <img src="assets/img/portfolio/bq2_cover.jpg" alt="cover de la deuxieme partie de formation bigquery" class="img-fluid" style="max-width: 600px; height: auto; margin-left: -350px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-between gy-4 mt-4">
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="portfolio-description"><br>
+              <h1>Centralisation de Données et Architecture Partie II</h1><br><br>
+              <p>
+                Centraliser des données est une chose, automatiser la mise à jour de ces dernières en est une autre. Nous avons vu dans une première démonstration comment centraliser des données dans Google Cloud BigQuery. Mais ne nous arrêtons pas en si bon chemin !
+              </p>
+              <p>
+                Nous tenterons ici de créer un mécanisme de requête API dynamique de la dernière date dans une table du data warehouse jusqu’à la date d’aujourd’hui. De cette manière, on va pouvoir envoyer régulièrement la nouvelle donnée vers notre table sans toucher à la donnée déjà présente.
+              </p>
+              <p>
+                Spoiler alert : les adjectifs qualificatifs de cette démarche sont « technique » et « fastidieuse ». Je vous recommande donc vivement de lire au préalable la partie 1 juste <a href="bigquery.html">ici</a>. Nous séparerons en deux grands mécanismes la démarche. Premièrement, il s’agit de récupérer la donnée et de la sauvegarder temporairement dans un bucket. Deuxièmement, il s’agit de l’envoyer à la table souhaitée.
+              </p>
+              <p>
+                Pour commencer, nous devons ajouter à nos données une dimension de date. Voici une version modifiée du code Python de la partie 1 qui ajoute une colonne de date :
+              </p>
+              <div class="code-container">
+                <div class="code-header">
+                  <span class="code-language">Python</span>
+                  <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+                </div>
+                <pre><code id="code-block" class="">
+import requests
+import pandas as pd
+
+# Define a function to get the data for a given ticker
+def get_stock_data(ticker):
+    url = f'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/2024-03-15/2024-06-15'
+    params = {
+        'adjusted': 'true',
+        'sort': 'asc',
+        'apiKey': 'your_api_key'
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    df = pd.DataFrame(data['results'])
+    df['date'] = pd.to_datetime(df['t'], unit='ms')  # Convert timestamp to datetime
+    return df
+
+# List of tickers
+tickers = ['AAPL', 'NVDA', 'AMZN']
+
+# Dictionary to store dataframes
+dataframes = {}
+
+# Loop through each ticker and get the data
+for ticker in tickers:
+    df = get_stock_data(ticker)[['date', 'vw', 'v', 'n']]
+    df.columns = ['date'] + [f"{ticker.lower()}_{col}" for col in df.columns[1:]]
+    dataframes[ticker] = df
+
+# Merge dataframes on the date column
+combined_df = dataframes[tickers[0]]
+for ticker in tickers[1:]:
+    combined_df = pd.merge(combined_df, dataframes[ticker], on='date')
+                </code></pre>
+              </div>
+              <p>
+                Prenons pour acquis que nous avons déjà notre table dans BigQuery. Si ce n’est pas le cas, nous allons l’importer manuellement pour cette première fois. Ensuite, la fonction s’occupera de la mettre à jour automatiquement. Vous pouvez utiliser le code suivant pour enregistrer au format CSV votre dataframe combined_df depuis un notebook :
+              </p>
+              <div class="code-container">
+                <div class="code-header">
+                  <span class="code-language">Python</span>
+                  <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+                </div>
+                <pre><code id="code-block" class="">
+combined_df.to_csv('stock_data_with_dates.csv', index=False)
+                </code></pre>
+              </div>
+              <p>
+                Puis rendez-vous directement dans votre bucket et cliquez sur importer des fichiers :
+              </p>
+              <div class="single-image">
+                <img src="assets/img/portfolio/bq2_1.png" alt="Importer des fichiers dans le bucket" class="img-fluid">
+              </div>
+              <p>
+                Importez ensuite le fichier dans le bucket créé en partie 1. Puis créez une table dans BigQuery :
+              </p>
+              <div class="single-image">
+                <img src="assets/img/portfolio/bq2_2.png" alt="Importer des fichiers dans le bucket" class="img-fluid">
+              </div>
+              <h3>Récupérer la donnée</h3>
+              <p>
+                Notre table est prête, nous devons maintenant créer une vue. Qu’est-ce qu’une vue, me demandez-vous ? La vue est une sorte de table créée à partir d’une ou plusieurs tables déjà existantes. Autrement dit, elle contient des données croisées ou calculées et est donc le résultat d’une requête SQL. Je n’importe aucune donnée, je crée simplement de l’information à partir de celle déjà présente.
+              </p>
+              <p>
+                Cliquez sur le bouton + et insérez le code suivant :
+              </p>
+              <div class="code-container">
+                <div class="code-header">
+                  <span class="code-language">SQL</span>
+                  <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+                </div>
+                <pre><code id="code-block" class="">
+DROP VIEW IF EXISTS `bq-stock-demo.data_warehouse.latest_update_view`;
+
+CREATE VIEW `bq-stock-demo.data_warehouse.latest_update_view` AS
+SELECT 'stocks_progression_with_dates' AS table_name, MAX(date) AS latest_date
+FROM `bq-stock-demo.data_warehouse.stocks_progression_with_dates`
+                </code></pre>
+              </div>
+              <p>
+                En exécutant la requête, une vue apparaîtra sous le nom de latest_update_view :
+              </p>
+              <div class="single-image">
+                <img src="assets/img/portfolio/bq2_4.png" alt="Vue de la dernière mise à jour" class="img-fluid">
+              </div>
+              <p>
+                Nous nous servirons de cette vue pour cibler dynamiquement la date la plus récente que contient la table. Si vous voulez voir la date la plus récente, cliquez simplement sur votre vue > cliquez sur vos deux variables > une requête va se générer. En l’exécutant, vous obtenez la vue avec la date souhaitée. À noter que chaque fois que la vue sera interrogée, elle sera mise à jour avec la dernière date dans les données.
+              </p>
+              <p>
+                Le but étant ensuite de modifier notre Cloud Function stock_demo_function pour que dynamiquement elle interroge la vue pour charger uniquement la donnée entre la date de cette vue et aujourd’hui :
+              </p>
+              <div class="code-container">
+                <div class="code-header">
+                  <span class="code-language">Python</span>
+                  <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+                </div>
+                <pre><code id="code-block" class="">
+import json
+import pandas as pd
+import requests
+from google.cloud import bigquery
+from google.cloud import storage
+from datetime import datetime
+
+def get_latest_date():
+    client = bigquery.Client()
+    query = """
+    SELECT latest_date
+    FROM `bq-stock-demo.data_warehouse.latest_update_view`
+    WHERE table_name = 'stocks_progression_with_dates'
+    """
+    query_job = client.query(query)
+    results = query_job.result()
+
+    latest_date = None
+    for row in results:
+        latest_date = row.latest_date
+
+    if not latest_date:
+        raise Exception('Erreur : impossible de récupérer la dernière date.')
+
+    return latest_date.strftime('%Y-%m-%d')
+
+def get_stock_data(ticker, start_date, end_date):
+    url = f'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/1/day/{start_date}/{end_date}'
+    params = {
+        'adjusted': 'true',
+        'sort': 'asc',
+        'apiKey': 'your_api_key'
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    df = pd.DataFrame(data['results'])
+    df['date'] = pd.to_datetime(df['t'], unit='ms')  # Convert timestamp to datetime
+    return df
+
+def upload_to_gcs(bucket_name, file_name, data):
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(file_name)
+    blob.upload_from_string(data.to_csv(index=False), content_type='text/csv')
+    print(f"Fichier {file_name} téléchargé dans le bucket {bucket_name}.")
+
+def main(event, context):
+    # Get today's date
+    end_date = datetime.now().strftime('%Y-%m-%d')
+    
+    # Get the latest date from BigQuery
+    start_date = get_latest_date()
+
+    # List of tickers
+    tickers = ['AAPL', 'NVDA', 'AMZN']
+
+    # Dictionary to store dataframes
+    dataframes = {}
+
+    # Loop through each ticker and get the data
+    for ticker in tickers:
+        df = get_stock_data(ticker, start_date, end_date)[['date', 'vw', 'v', 'n']]
+        df.columns = ['date'] + [f"{ticker.lower()}_{col}" for col in df.columns[1:]]
+        dataframes[ticker] = df
+
+    # Merge dataframes on the date column
+    combined_df = dataframes[tickers[0]]
+    for ticker in tickers[1:]:
+        combined_df = pd.merge(combined_df, dataframes[ticker], on='date')
+
+    # Create file name with timestamp
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    file_name = f'stock_data_{timestamp}.csv'
+    bucket_name = 'stock_demo_bucket'
+
+    # Upload to GCS
+    upload_to_gcs(bucket_name, file_name, combined_df)
+
+    return 'Données insérées avec succès', 200
+                </code></pre>
+              </div>
+              <h3>Renvoyer la donnée vers notre data warehouse</h3>
+              <p>
+                Il faut ensuite créer une seconde fonction qui, lorsque le nouveau fichier arrive dans le bucket, est ajoutée à la table. On crée une nouvelle Cloud Function de la même manière que la première à l’exception du type de déclencheur qui est cette fois-ci cloud storage et finalized, c’est-à-dire que la fonction se déclenche à l’arrivée d’un nouveau fichier dans le bucket :
+              </p>
+              <div class="single-image">
+                <img src="assets/img/portfolio/bq2_5.png" alt="Importer des fichiers dans le bucket" class="img-fluid">
+              </div>
+              <div class="code-container">
+                <div class="code-header">
+                  <span class="code-language">Python</span>
+                  <button class="copy-button" onclick="copyCode()"><i class="fas fa-copy"></i></button>
+                </div>
+                <pre><code id="code-block" class="">
+import json
+from google.cloud import bigquery
+from google.cloud import storage
+
+def load_csv_to_bigquery(event, context):
+    client = bigquery.Client()
+    storage_client = storage.Client()
+
+    bucket_name = event['bucket']
+    file_name = event['name']
+    
+    # Vérifier que le fichier contient "stock_data"
+    if 'stock_data' not in file_name:
+        print(f"Le fichier {file_name} ne correspond pas aux critères.")
+        return
+    
+    uri = f'gs://{bucket_name}/{file_name}'
+    table_id = 'bq-stock-demo-428323.CDP.stocks_progression_with_dates'
+
+    job_config = bigquery.LoadJobConfig(
+        source_format=bigquery.SourceFormat.CSV,
+        skip_leading_rows=1,  # Skip the header row in the CSV file
+        autodetect=True,  # Autodetect the schema of the CSV file
+        write_disposition=bigquery.WriteDisposition.WRITE_APPEND  # Append to the existing table
+    )
+    
+    load_job = client.load_table_from_uri(
+        uri,
+        table_id,
+        job_config=job_config
+    )  # Make an API request.
+    
+    load_job.result()  # Wait for the job to complete.
+    
+    print(f"Loaded {load_job.output_rows} rows into {table_id}.")
+
+    # Optionally you can delete the file from GCS after loading it to BigQuery
+    # bucket = storage_client.bucket(bucket_name)
+    # blob = bucket.blob(file_name)
+    # blob.delete()
+    # print(f"Deleted file {file_name} from bucket {bucket_name}.")
+                </code></pre>
+              </div>
+              <p>
+                Done ! Vous pouvez aller dans cloud scheduler et « forcer l’exécution » de stock_demo_function pour tester dès maintenant si le processus fonctionne. Une fois exécuté, rendez-vous dans BigQuery et observez si vos données sont à jour. Vous pouvez voir rapidement ceci en affichant votre vue via une requête :
+              </p>
+              <div class="single-image">
+                <img src="assets/img/portfolio/bq2_6.png" alt="Importer des fichiers dans le bucket" class="img-fluid">
+              </div>
+              <p>
+                Si ce n’est pas le cas, allez premièrement vérifier que dans votre bucket un nouveau fichier soit présent avec la date d’aujourd’hui du style stock_data_20240101000000. Vérifiez également le journal (log) en vous rendant dans logs explorer depuis la barre de recherche.
+              </p>
+              <h3>Conclusion</h3>
+              <p>
+                Pour résumer la succession de mécanismes, on a une vue qui, chaque fois qu’elle est appelée, fournit la date la plus récente de notre table stocks_progression_with_dates. Cette date est le point de départ de notre requête API contenu dans la Cloud Function. Les données sont récupérées à partir de cette date et jusqu’à aujourd’hui. D’autre part, c’est le Cloud Scheduler qui active la Cloud Function de manière récurrente. Si on programme ça de manière hebdomadaire, par exemple tous les jeudis, on va récupérer la donnée de jeudi dernier jusqu’à aujourd’hui. Pour finir, la deuxième Cloud Function sert quant à elle à ajouter la donnée à notre table stock_progression_with_dates. Pas besoin cette fois-ci de Cloud Scheduler pour solliciter cette fonction. Elle se déclenchera automatiquement lorsque un nouveau fichier arrive dans le bucket.
+              </p>
+              <br><br><br>
+            </div>
+          </div>
+
+          <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="portfolio-info">
+              <h3>Informations</h3>
+              <ul>
+                <li><strong>Sujets</strong>Gestion de données, Automatisation de mise à jour</li>
+                <li><strong>Écrit par</strong>Sacha Benadiba</li>
+                <li><strong>Dernière mise à jour de l'article</strong> 18 Avril, 2024</li>
+                <li><strong>Lecture suivante</strong>Centralisation de données et architecture partie III : Visulisation de données</li>
+                <li><a href="#" class="btn-visit align-self-start">Lire la partie III</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section><!-- /Portfolio Details Section -->
+    </main>
+
+    <footer id="footer" class="footer position-relative">
+      <div class="container">
+        <h3 class="sitename">Sacha Benadiba</h3>
+        <p>Merci de visiter mon portfolio. Si vous avez des questions ou souhaitez discuter de collaborations potentielles, n'hésitez pas à me contacter.</p>
+        <div class="social-links d-flex justify-content-center">
+          <a href=""><i class="bi bi-twitter-x"></i></a>
+          <a href=""><i class="bi bi-facebook"></i></a>
+          <a href=""><i class="bi bi-instagram"></i></a>
+          <a href=""><i class="bi bi-skype"></i></a>
+          <a href=""><i class="bi bi-linkedin"></i></a>
+        </div>
+        <div class="container">
+          <div class="copyright">
+            <span>Copyright</span> <strong class="px-1 sitename">Alex Smith</strong> <span>All Rights Reserved</span>
+          </div>
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/typed.js/typed.umd.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+      window.onscroll = function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("innerBar").style.width = scrolled + "%";
+      };
+    </script>
+
+    <script>
+      function copyCode() {
+        const codeBlock = document.getElementById('code-block');
+        const range = document.createRange();
+        range.selectNode(codeBlock);
+        window.getSelection().removeAllRanges();  // Clear current selection
+        window.getSelection().addRange(range);  // Select the text
+        try {
+          document.execCommand('copy');
+          // Change the icon to 'checked' after copy
+          const copyButton = document.querySelector('.copy-button i');
+          copyButton.classList.remove('fa-copy');
+          copyButton.classList.add('fa-check');
+          // Reset the icon back to 'copy' after 2 seconds
+          setTimeout(() => {
+            copyButton.classList.remove('fa-check');
+            copyButton.classList.add('fa-copy');
+          }, 500);
+        } catch (err) {
+          alert('Failed to copy code');
+        }
+        window.getSelection().removeAllRanges();  // Deselect the text
+      }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/components/prism-javascript.min.js"></script>
+
+  </body>
+</html>

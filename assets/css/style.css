@@ -1,0 +1,15 @@
+.nowrap-role {
+  white-space: nowrap;
+  margin-right: 2px;
+}
+
+.affiliations-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.affiliations-list > div {
+  margin-bottom: 0;
+} 
